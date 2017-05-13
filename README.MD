@@ -4,12 +4,39 @@
 
 ## properties:
 ```javascript
-AUTO_PROPERTIES
+
+  static propTypes = {
+    className: PropTypes.string,
+    width: PropTypes.string,
+    itemSize: PropTypes.object,
+    count: PropTypes.number,
+    unit: PropTypes.string
+  };
+
+  static defaultProps = {};
+  
 ```
 
 ## usage:
 ```jsx
-AUTO_USAGE
+class App extends React.Component {
+  render() {
+    return (
+      <div className="hello-react-layout-justify-list">
+        <ReactLayoutJustifyList width="360" count={3} unit="px" itemSize={{ width:110,height:80}}>
+          <div className="test1">123</div>
+          <div className="test1">1244</div>
+          <div className="test1">1244</div>
+          <div className="test1">1244</div>
+          <div className="test1">1244</div>
+          <div className="test1">1244</div>
+          <div className="test1">1244</div>
+        </ReactLayoutJustifyList>
+      </div>
+    );
+  }
+}
+
 ```
 
 
