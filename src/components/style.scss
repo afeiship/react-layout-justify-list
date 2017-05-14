@@ -1,4 +1,4 @@
-$mobile-children-list: (2, 3, 4, 5, 6);
+$mobile-children: (2, 3, 4, 5, 6);
 
 .react-layout-justify {
   &-list {
@@ -7,11 +7,11 @@ $mobile-children-list: (2, 3, 4, 5, 6);
     margin-right: auto;
 
     //generate common data-rows:
-    @each $value in $mobile-children-list {
+    @each $value in $mobile-children {
       &[data-rows="#{$value}"] {
         > .react-layout-justify-item {
           &:nth-child(#{$value}n) {
-            margin-right: 0!important;
+            margin-right: 0 !important;
           }
         }
       }
