@@ -8,7 +8,7 @@
   static propTypes = {
     className: PropTypes.string,
     width: PropTypes.string,
-    item: PropTypes.object,
+    childSize: PropTypes.object,
     count: PropTypes.number,
     unit: PropTypes.string
   };
@@ -23,7 +23,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="hello-react-layout-justify-list">
-        <ReactLayoutJustifyList width="360" count={3} unit="px" item={{ width:110,height:80}}>
+        <ReactLayoutJustifyList width="360" count={3} unit="px" childSize={{ width:110,height:80}}>
           <div style={{border:'2px solid #f00'}} className="test1">123</div>
           <div className="test1">1244</div>
           <div className="test1">1244</div>

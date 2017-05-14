@@ -11,7 +11,7 @@ export default class extends PureComponent {
   static propTypes = {
     className: PropTypes.string,
     width: PropTypes.string,
-    item: PropTypes.object,
+    childSize: PropTypes.object,
     count: PropTypes.number,
     unit: PropTypes.string
   };
@@ -20,23 +20,23 @@ export default class extends PureComponent {
   /*===properties end===*/
 
   get children() {
-    const {children, width, count, item, unit} = this.props;
-    const gap = (width - item.width * count) / (count - 1);
+    const {children, width, count, childSize, unit} = this.props;
+    const gap = (width - childSize.width * count) / (count - 1);
     return React.Children.map(children, (elem, index) => {
       const {style, ...props}  = elem.props;
       return React.cloneElement(elem, {
         className: 'react-layout-justify-item',
         style: objectAssign({
           marginRight: `${gap}${unit}`,
-          width: `${item.width}${unit}`,
-          height: `${item.height}${unit}`,
+          width: `${childSize.width}${unit}`,
+          height: `${childSize.height}${unit}`,
         }, style)
       }, ...props)
     });
   }
 
   render() {
-    const {children, className, width, item, unit, count, ...props} = this.props;
+    const {children, className, width, childSize, unit, count, ...props} = this.props;
     return (
       <div {...props} style={{width: `${width}${unit}`}} data-rows={count}
            className={classNames('react-layout-justify-list', className)}>
