@@ -1,10 +1,15 @@
 *{margin: 0;padding:0;}
 ul,li{list-style: none;}
 
+@import './components/style.scss';
+
 .hello-react-layout-justify-list{
   color:#F00;
   padding:100px 20px;
   position: relative;
+  .auto{
+    margin: 0 auto;
+  }
   button{
     background: #3cc51f;
     width:100%;
@@ -24,9 +29,10 @@ ul,li{list-style: none;}
     }
   }
 
-  .react-layout-justify-item{
+  .react-layout-justify-list-item{
     background: #eee;
-    margin-bottom:20px;
-    padding:10px;
+    width:240px;
+    height:200px;
+    margin-bottom: 10px;
   }
 }

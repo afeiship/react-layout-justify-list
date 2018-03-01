@@ -1,47 +1,60 @@
-import './style.scss';
-
-import React, {PureComponent} from 'react';
-
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import objectAssign from 'object-assign';
 
-export default class extends PureComponent {
+const VALUE_UNIT = /([0-9.]+)([a-z]+)/;
+const DEFAULT_VALUE = [, 0, 'px' ];
+
+export default class ReactLayoutJustifyList extends Component {
   /*===properties start===*/
   static propTypes = {
     className: PropTypes.string,
     width: PropTypes.string,
-    childSize: PropTypes.object,
+    itemWidth: PropTypes.string,
     count: PropTypes.number,
-    unit: PropTypes.string
   };
 
   static defaultProps = {};
   /*===properties end===*/
 
+  static parseValue(inValue){
+    return inValue.match(VALUE_UNIT) || DEFAULT_VALUE;
+  }
+
+  get gap(){
+    const { width, count, itemWidth, children } = this.props;
+    const wrapperData = ReactLayoutJustifyList.parseValue(width);
+    const [ _, wrapperWidth, unit ] = wrapperData;
+    return ( parseFloat(wrapperWidth) -  parseFloat( itemWidth ) * count ) / ( count -1 ) + unit;
+  }
+
   get children() {
-    const {children, width, count, childSize, unit} = this.props;
-    const gap = (width - childSize.width * count) / (count - 1);
+    const { children } = this.props;
+
     return React.Children.map(children, (elem, index) => {
       const {style, ...props}  = elem.props;
       return React.cloneElement(elem, {
-        className: 'react-layout-justify-item',
+        className: 'react-layout-justify-list-item',
         style: objectAssign({
-          marginRight: `${gap}${unit}`,
-          width: `${childSize.width}${unit}`,
-          height: `${childSize.height}${unit}`,
+          marginRight: `${this.gap}`,
         }, style)
       }, ...props)
     });
   }
 
-  render() {
-    const {children, className, width, childSize, unit, count, ...props} = this.props;
+  render(){
+    //( $wrap-width - $item-width * $count )/ ($count - 1)
+    const { width, count, itemWidth, className, style, ...props } = this.props;
     return (
-      <div {...props} style={{width: `${width}${unit}`}} data-rows={count}
-           className={classNames('react-layout-justify-list', className)}>
-        {this.children}
-      </div>
-    );
+      <section {...props}
+        data-count={count}
+        className={ classNames('react-layout-justify-list', className)}
+        style={ objectAssign({ width: width }, style ) }>
+        <div className="react-layout-justify-list-container" style={{ marginRight:`-${this.gap}`}}>
+          { this.children }
+        </div>
+      </section>
+    )
   }
 }
