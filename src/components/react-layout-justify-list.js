@@ -50,7 +50,7 @@ export default class ReactLayoutJustifyList extends Component {
     return (
       <section {...props}
         data-count={count}
-        className={ classNames('react-layout-justify-list', className)}
+        className={ classNames('react-layout-justify-list clearfix', className)}
         style={ objectAssign({ width: width }, style ) }>
         <div className="react-layout-justify-list-container" style={{ marginRight:`-${this.gap}`}}>
           { this.children }
