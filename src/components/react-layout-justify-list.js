@@ -26,7 +26,8 @@ export default class ReactLayoutJustifyList extends Component {
     const { width, count, itemWidth, children } = this.props;
     const wrapperData = ReactLayoutJustifyList.parseValue(width);
     const [ _, wrapperWidth, unit ] = wrapperData;
-    return ( parseFloat(wrapperWidth) -  parseFloat( itemWidth ) * count ) / ( count -1 ) + unit;
+    const _gap = ( parseFloat(wrapperWidth) -  parseFloat( itemWidth ) * count ) / ( count -1 );
+    return _gap.toFixed(2) + unit;
   }
 
   get children() {
