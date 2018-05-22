@@ -9,7 +9,8 @@ class App extends React.Component {
         <ReactLayoutJustifyList
           className="auto"
           style={{ border:'1px solid #f80'}}
-          width="800px" itemWidth="240px"
+          width="800px"
+          itemWidth="240px"
           count={3}>
           <div className="test1">123</div>
           <div className="test1">1244</div>

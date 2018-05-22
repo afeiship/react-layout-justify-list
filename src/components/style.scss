@@ -1,6 +1,9 @@
-$mobile-children: (2,3,4,5,6);
+$react-layout-justify-list-options:(
+  support-children:(2,3,4,5,6)
+);
 
 .react-layout-justify-list {
+  $support-children: map-get($map: $react-layout-justify-list-options, $key: support-children);
   overflow: hidden;
   &-ul{
     overflow: hidden;
@@ -11,7 +14,7 @@ $mobile-children: (2,3,4,5,6);
     float: left;
   }
 
-  @each $value in $mobile-children{
+  @each $value in $support-children{
     &[data-count='#{$value}']{
       .react-layout-justify-list-item:nth-child(#{$value}n + 1):nth-last-child(-n + #{$value}),
       .react-layout-justify-list-item:nth-child(#{$value}n + 1):nth-last-child(-n + #{$value}) ~ .react-layout-justify-list-item{
