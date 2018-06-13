@@ -25,15 +25,16 @@ class App extends React.Component {
         <ReactLayoutJustifyList
           className="auto"
           style={{ border:'1px solid #f80'}}
-          width="800px" itemWidth="240px"
+          width="800px"
+          itemWidth="240px"
           count={3}>
-          <div className="test1">123</div>
-          <div className="test1">1244</div>
-          <div className="test1">1244</div>
-          <div className="test1">1244</div>
-          <div className="test1">1244</div>
-          <div className="test1">1244</div>
-          <div style={{border:'2px solid #090'}} className="test1">1244</div>
+          {
+            [1,2,3,4,5,6,7,8,9,10,11].map(item=>{
+              return (
+                <div key={item} className="test1">123</div>
+              )
+            })
+          }
         </ReactLayoutJustifyList>
       </div>
     );

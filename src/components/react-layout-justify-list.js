@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import objectAssign from 'object-assign';
 import toUnitValue from 'next-to-unit-value';
 
-export default class ReactLayoutJustifyList extends Component {
+export default class extends Component {
   /*===properties start===*/
   static propTypes = {
     className: PropTypes.string,
@@ -41,10 +41,12 @@ export default class ReactLayoutJustifyList extends Component {
     //( $wrap-width - $item-width * $count )/ ($count - 1)
     const { width, count, itemWidth, className, style, ...props } = this.props;
     return (
-      <section {...props}
+      <section
         data-count={count}
         className={ classNames('react-layout-justify-list', className)}
-        style={ objectAssign({ width: width }, style ) }>
+        style={ objectAssign({ width: width }, style ) }
+        {...props}
+        >
         <div className="clearfix react-layout-justify-list-container" style={{ marginRight:`-${this.gap}`}}>
           { this.children }
         </div>
