@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import objectAssign from 'object-assign';
-
-const VALUE_UNIT = /([0-9.]+)([a-z]+)/;
-const DEFAULT_VALUE = [, 0, 'px' ];
+import toUnitValue from 'next-to-unit-value';
 
 export default class ReactLayoutJustifyList extends Component {
   /*===properties start===*/
@@ -18,13 +16,9 @@ export default class ReactLayoutJustifyList extends Component {
   static defaultProps = {};
   /*===properties end===*/
 
-  static parseValue(inValue){
-    return inValue.match(VALUE_UNIT) || DEFAULT_VALUE;
-  }
-
   get gap(){
     const { width, count, itemWidth, children } = this.props;
-    const wrapperData = ReactLayoutJustifyList.parseValue(width);
+    const wrapperData = toUnitValue(width);
     const [ _, wrapperWidth, unit ] = wrapperData;
     const _gap = ( parseFloat(wrapperWidth) -  parseFloat( itemWidth ) * count ) / ( count -1 );
     return _gap.toFixed(2) + unit;
@@ -32,7 +26,6 @@ export default class ReactLayoutJustifyList extends Component {
 
   get children() {
     const { children } = this.props;
-
     return React.Children.map(children, (elem, index) => {
       const {style, ...props}  = elem.props;
       return React.cloneElement(elem, {
@@ -40,7 +33,7 @@ export default class ReactLayoutJustifyList extends Component {
         style: objectAssign({
           marginRight: `${this.gap}`,
         }, style)
-      }, ...props)
+      }, ...props);
     });
   }
 

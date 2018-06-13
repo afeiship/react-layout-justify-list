@@ -4,8 +4,8 @@ $react-layout-justify-list-options:(
 
 .react-layout-justify-list {
   $support-children: map-get($map: $react-layout-justify-list-options, $key: support-children);
-  overflow: hidden;
-  &-ul{
+  &,
+  &-container{
     overflow: hidden;
   }
 
